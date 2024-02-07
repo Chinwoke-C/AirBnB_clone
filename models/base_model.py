@@ -30,7 +30,7 @@ class BaseModel:
 
     
     def to_dict(self):
-        r_dict = self.__dict__.copy()
+        r_dict = self.__dict__
         r_dict["__class__"] = self.__class__.__name__
         r_dict["created_at"] = self.created_at.isoformat()
         r_dict["updated_at"] = self.updated_at.isoformat()
