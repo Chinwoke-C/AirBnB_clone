@@ -6,7 +6,6 @@
 * 0x04 Testing
 * 0x05 Usage
 * 0x06 Authors
-* 0x01 Introduction
 
 Team project to build a clone of AirBnB.
 
@@ -31,7 +30,7 @@ PEP8
 All the development and testing was runned over an operating system Ubuntu 20.04 LTS using programming language Python 3.8.3. The editors used were VIM 8.1.2269.
 
 ### 0x03 Installation
-git clone https://github.com/aysuarex/AirBnB_clone.git
+git clone https://github.com/Chinwoke-C/AirBnB_clone.git
 change to the AirBnb directory and run the command:
 
  `./console.py`
