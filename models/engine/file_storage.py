@@ -1,33 +1,37 @@
 #!/usr/bin/python3
 
-""" """
+""" Defines the FileStorage class."""
 
 
 
 import json
 from os.path import exists
-
+from models.base_model import BaseModel
 
 class FileStorage:
-    """ """
+    """Represent an abstracted storage engine.
+
+    Attributes:
+        __file_path (str): The name of the file to save objects to.
+        __objects (dict): A dictionary of instantiated objects. 
+    """
 
     __file_path = "file.json"
     __objects = {}
 
     def all(self):
-        """ """
-        return self.__objects
+        """Return the dictionary __objects."""
+        return FileStorage.__objects
     
     def new(self, obj):
+        """sets in dictionary the obj with key <obj class name>.id"""
         class_name = obj.__class__.__name__
-        self.__objects[f"{class_name}.{obj.id}"] = obj
-
+        FileStorage.__objects["{}.{}".format(class_name, obj.id)] = obj
     
     def save(self):
-        """ """
-        obj_dict = {}
-        for key, values in self.__objects.items():
-            obj_dict[key] = values.to_dict()
+        """Serialize __objects to the JSON file __file_path."""
+        odict = FileStorage.__objects
+        obj_dict = {obj: odict[obj].to_dict() for obj in odict.keys()}
         with open(self.__file_path, "w") as file:
             json.dump(obj_dict, file)
     
