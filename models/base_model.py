@@ -4,7 +4,7 @@
 
 from datetime import datetime
 from uuid import uuid4
-from models import storage
+import models
 
 class BaseModel:
     """Represents the BaseModel of the HBnB project."""
@@ -30,6 +30,8 @@ class BaseModel:
             self.id = str(uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
+            models.storage.new(self)
+            
 
     
     def __str__(self):
@@ -41,7 +43,7 @@ class BaseModel:
         """Update updated_at with the current datetime."""
 
         self.updated_at = datetime.now()
-        storage.save()
+        models.storage.save()
 
     
     def to_dict(self):
