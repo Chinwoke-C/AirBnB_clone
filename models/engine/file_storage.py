@@ -28,11 +28,11 @@ class FileStorage:
     def save(self):
         """ """
         obj_dict = {}
-        for key, values in self.__objects.items():
+        for key, values in FileStorage.__objects.items():
             # I dont know whats causing the error on this line
             # I've tried everything
             obj_dict[key] = values.to_dict()
-        with open(self.__file_path, "w") as file:
+        with open(FileStorage.__file_path, "w", encoding='utf-8') as file:
             json.dump(obj_dict, file)
 
 
