@@ -4,37 +4,38 @@
 import cmd
 
 class HBNBCommand(cmd.Cmd):
-    """ """
-    prompt = ">>> "
+    """hbnb console """
+    prompt = "hbnb "
 
-    def quit(self, args):
+    def do_quit(self, args):
+        """ This command ends the program """
         return True
     
-    def EOF(self, args):
-        """ """
+    def do_EOF(self, args):
+        """ End of file (exits the program) """
         print()
         return True
     
     def emptyline(self, args):
+        """ This print a new line after the promth """
+        pass
+    
+    def do_create(self, args):
+        pass
+    
+    def do_destory(self, args):
         """ """
         pass
     
-    def create(self, args):
-        pass
-    
-    def destory(self, args):
+    def do_how(self, args):
         """ """
         pass
     
-    def show(self, args):
+    def do_all(self, args):
         """ """
         pass
     
-    def all(self, args):
-        """ """
-        pass
-    
-    def update(self, args):
+    def do_update(self, args):
         """ """
         pass
     
@@ -43,6 +44,5 @@ class HBNBCommand(cmd.Cmd):
         pass
     
 
-
-    # if __name__ == '__main__':
-    #     HBNBCommand().cmdloop()
+if __name__ == '__main__':
+    HBNBCommand().cmdloop()
