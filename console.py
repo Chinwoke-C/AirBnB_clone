@@ -56,7 +56,8 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
 
     def do_destroy(self, args):
-        """ """
+        """ Usage: destroy <class> <id> or <class>.destroy(<id>)
+        Delete a class instance of a given id."""
         tok = args.split()
         if args == '':
             print("** class name missing **")
@@ -75,7 +76,9 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
 
     def do_all(self, args):
-        """ """
+        """ Usage: all or all <class> or <class>.all()
+        Display string representations of all instances of a given class.
+        If no class is specified, displays all instantiated objects."""
         tok = args.split()
         if args == "" or tok[0] in HBNBCommand.object.keys():
             all_objs = storage.all()
@@ -85,8 +88,33 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
     
     def do_update(self, args):
-        """ """
-        pass
+         """ Method to update JSON file"""
+        args = args.split()
+        if len(args) == 0:
+            print('** class name missing **')
+            return
+        elif args[0] not in self.classes:
+            print("** class doesn't exist **")
+            return
+        elif len(args) == 1:
+            print('** instance id missing **')
+            return
+        else:
+            key = args[0] + '.' + args[1]
+            if key in storage.all():
+                if len(args) > 2:
+                    if len(args) == 3:
+                        print('** value missing **')
+                    else:
+                        setattr(
+                            storage.all()[key],
+                            args[2],
+                            arg[s3][1:-1])
+                        storage.all()[key].save()
+                else:
+                    print('** attribute name missing **')
+            else:
+                print('** no instance found **')
     
     def default(self, args):
         """ """
