@@ -4,12 +4,13 @@
 import cmd
 from models.base_model import BaseModel
 from models import storage
+from models.user import User
 
 class HBNBCommand(cmd.Cmd):
     """hbnb console """
     prompt = "(hbnb) "
     object = {
-        'BaseModel': BaseModel
+        'BaseModel': BaseModel, "User": User
         }
     def do_quit(self, args):
         """ This command ends the program """
