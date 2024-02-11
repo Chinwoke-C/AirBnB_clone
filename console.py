@@ -5,12 +5,19 @@ import cmd
 from models.base_model import BaseModel
 from models import storage
 from models.user import User
+from models.place import Place
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.review import Review
 
 class HBNBCommand(cmd.Cmd):
     """hbnb console """
     prompt = "(hbnb) "
     object = {
-        'BaseModel': BaseModel, "User": User
+        'BaseModel': BaseModel, "User": User, 'City': City,
+               'Place': Place, 'Amenity': Amenity, 'Review': Review,
+               'State': State
         }
     def do_quit(self, args):
         """ This command ends the program """
@@ -117,8 +124,25 @@ class HBNBCommand(cmd.Cmd):
                 print('** no instance found **')
     
     def default(self, args):
-        """ """
-        pass
+        """Default behavior for cmd module when input is invalid"""
+        argdict = {
+            "all": self.do_all,
+            "show": self.do_show,
+            "destroy": self.do_destroy,
+            "count": self.do_count,
+            "update": self.do_update
+        }
+        match = re.search(r"\.", arg)
+        if match is not None:
+            argl = [arg[:match.span()[0]], arg[match.span()[1]:]]
+            match = re.search(r"\((.*?)\)", argl[1])
+            if match is not None:
+                command = [argl[1][:match.span()[0]], match.group()[1:-1]]
+                if command[0] in argdict.keys():
+                    call = "{} {}".format(argl[0], command[1])
+                    return argdict[command[0]](call)
+        print("*** Unknown syntax: {}".format(arg))
+        return False
     
 
 if __name__ == '__main__':
