@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 
-
 import cmd
 from models.base_model import BaseModel
 from models import storage
@@ -93,9 +92,9 @@ class HBNBCommand(cmd.Cmd):
             print(str_rep)
         else:
             print("** class doesn't exist **")
-    
+
     def do_update(self, args):
-         """ Method to update JSON file"""
+        """ Method to update JSON file"""
         args = args.split()
         if len(args) == 0:
             print('** class name missing **')
@@ -116,12 +115,13 @@ class HBNBCommand(cmd.Cmd):
                         setattr(
                             storage.all()[key],
                             args[2],
-                            arg[s3][1:-1])
+                            args[3][1:-1])  # Corrected the index from 'arg[s3]' to 'args[3]'
                         storage.all()[key].save()
                 else:
                     print('** attribute name missing **')
             else:
                 print('** no instance found **')
+
     
     def default(self, args):
         """Default behavior for cmd module when input is invalid"""
@@ -134,14 +134,14 @@ class HBNBCommand(cmd.Cmd):
         }
         match = re.search(r"\.", arg)
         if match is not None:
-            argl = [arg[:match.span()[0]], arg[match.span()[1]:]]
+            argl = [args[:match.span()[0]], args[match.span()[1]:]]
             match = re.search(r"\((.*?)\)", argl[1])
             if match is not None:
                 command = [argl[1][:match.span()[0]], match.group()[1:-1]]
                 if command[0] in argdict.keys():
                     call = "{} {}".format(argl[0], command[1])
                     return argdict[command[0]](call)
-        print("*** Unknown syntax: {}".format(arg))
+        print("*** Unknown syntax: {}".format(args))
         return False
     
 

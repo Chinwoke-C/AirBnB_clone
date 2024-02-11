@@ -32,7 +32,7 @@ class FileStorage:
 
     
     def save(self):
-          """ serializes objects to the JSON file (path: __file_path) """
+        """ serializes objects to the JSON file (path: __file_path) """
         with open(FileStorage.__file_path, 'w', encoding='utf-8') as fname:
             new_dict = {key: obj.to_dict() for key, obj in
                         FileStorage.__objects.items()}
